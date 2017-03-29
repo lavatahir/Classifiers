@@ -11,4 +11,7 @@ public class CClass {
 	public ArrayList<Integer> getFeatures(){
 		return features;
 	}
+	public void addFeature(Integer f){
+		features.add(f);
+	}
 }

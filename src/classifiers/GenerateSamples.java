@@ -1,6 +1,7 @@
 package classifiers;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateSamples {
 	private int c;
@@ -17,10 +18,17 @@ public class GenerateSamples {
 	}
 
 	private void generateSamples() {
-		ArrayList<ArrayList<CClass>> cClassSamples = new ArrayList<ArrayList<CClass>>();
-		for(CClass cc : cClasses){
-			
+		ArrayList<ArrayList<Integer>> cClassSamples = new ArrayList<ArrayList<Integer>>(numSamples);
+		CClass cc = cClasses.get(0);
+		for(int i = 0 ; i < numSamples;i++){
+			ArrayList<Integer> features = ArrayList<Integer>();
+			for(int j = 0;j<d;j++){
+				cClassSamples
+				cc.addFeature(ThreadLocalRandom.current().nextInt(0, 2));
+			}
+			cClassSamples.add(cc.getFeatures());
 		}
+		System.out.println(cClassSamples);
 		
 	}
 
@@ -32,5 +40,8 @@ public class GenerateSamples {
 		}
 		return cClasses;
 	}
-	
+	public static void main(String[] args){
+		GenerateSamples gs = new GenerateSamples(4,10,2000);
+		
+	}
 }
