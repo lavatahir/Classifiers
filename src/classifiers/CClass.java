@@ -3,15 +3,18 @@ package classifiers;
 import java.util.*;
 
 public class CClass {
-	private ArrayList<Integer> features;
+	private ArrayList<ArrayList<Integer>>classSamples;
 	
-	public CClass(ArrayList<Integer> givenFeatures){
-		features = new ArrayList<Integer>(givenFeatures);
+	public CClass(){
+		classSamples = new ArrayList<ArrayList<Integer>>();
 	}
-	public ArrayList<Integer> getFeatures(){
-		return features;
+	
+	public void setClassSamples(ArrayList<ArrayList<Integer>> cClassSamples) {
+		classSamples.addAll(cClassSamples);	
 	}
-	public void addFeature(Integer f){
-		features.add(f);
+
+	public ArrayList<ArrayList<Integer>> getClassSamples() {
+		return classSamples;
 	}
+	
 }

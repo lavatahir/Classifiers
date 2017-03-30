@@ -8,40 +8,48 @@ public class GenerateSamples {
 	private int d;
 	private int numSamples;
 	private ArrayList<CClass> cClasses;
+	private JGraphAdapterDemo graph;
 	
-	public GenerateSamples(int c, int d, int num){
+	public GenerateSamples(int c, int num, JGraphAdapterDemo graph){
 		this.c = c;
-		this.d = d;
-		numSamples = num;
-		cClasses = generateCClasses(c);
+		this.d = graph.getGraph().vertexSet().size();
+		this.numSamples = num;
+		this.cClasses = generateCClasses(c);
+		this.graph = graph;
 		generateSamples();
 	}
 
 	private void generateSamples() {
 		ArrayList<ArrayList<Integer>> cClassSamples = new ArrayList<ArrayList<Integer>>(numSamples);
-		CClass cc = cClasses.get(0);
-		for(int i = 0 ; i < numSamples;i++){
-			ArrayList<Integer> features = ArrayList<Integer>();
-			for(int j = 0;j<d;j++){
-				cClassSamples
-				cc.addFeature(ThreadLocalRandom.current().nextInt(0, 2));
+		
+		ArrayList<String> features = graph.getFeatures();
+		for(CClass cc : cClasses){
+			for(int i = 0 ; i < numSamples;i++){
+				ArrayList<Integer> cClassSample = new ArrayList<Integer>(features.size());
+				
+				for(int j = 0;j<features.size();j++){
+					cClassSample.add(ThreadLocalRandom.current().nextInt(0, 2));
+				}
+				System.out.println(cClassSample);
+				cClassSamples.add(cClassSample);
 			}
-			cClassSamples.add(cc.getFeatures());
+			cc.setClassSamples(cClassSamples);
 		}
-		System.out.println(cClassSamples);
+		
 		
 	}
 
 	private ArrayList<CClass> generateCClasses(int c) {
 		ArrayList<CClass> cClasses = new ArrayList<>();
 		for(int i = 0; i < c; i++){
-			CClass cc = new CClass(new ArrayList<Integer>());
+			CClass cc = new CClass();
 			cClasses.add(cc);
 		}
 		return cClasses;
 	}
 	public static void main(String[] args){
-		GenerateSamples gs = new GenerateSamples(4,10,2000);
+		JGraphAdapterDemo jg = new JGraphAdapterDemo(10);
+		GenerateSamples gs = new GenerateSamples(4,2000,jg);
 		
 	}
 }
