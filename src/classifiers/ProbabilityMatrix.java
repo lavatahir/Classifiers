@@ -1,29 +1,35 @@
 package classifiers;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class ProbabilityMatrix {
-	ArrayList<ArrayList<Double>> probs;
+	ArrayList<ArrayList<String>> probs;
 	Random generator = new Random();
+	DecimalFormat df = new DecimalFormat("$#");
 	public ProbabilityMatrix(int size){
-		probs = new ArrayList<ArrayList<Double>>(size);
+		df.setMinimumFractionDigits(2);
+		probs = new ArrayList<ArrayList<String>>(size);
 		for(int i = 0; i < size; i++){
-			ArrayList<Double> rowProbs = new ArrayList<Double>();
+			ArrayList<String> rowProbs = new ArrayList<String>();
 			for(int j = 0; j < 10; j++){
-				double number = Double.parseDouble(String.format( "%.2f", generator.nextDouble() * 1,2));
+				
+				
+				String number = String.format( "%.02f", generator.nextDouble() * 1,2);
+				
 				rowProbs.add(number);
 			}
 			probs.add(rowProbs);
 		}
 	}
-	public ArrayList<ArrayList<Double>> getProbs(){
+	public ArrayList<ArrayList<String>> getProbs(){
 		return probs;
 	}
 	
 	public String toString(){
 		String s = "";
-		for(ArrayList<Double> probRow : probs){
-			for(Double d : probRow){
+		for(ArrayList<String> probRow : probs){
+			for(String d : probRow){
 				s+="\t" + d;
 			}
 			s+= "\n";

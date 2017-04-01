@@ -18,14 +18,16 @@ public class GenerateSamples {
 		this.d = graph.getGraph().vertexSet().size();
 		this.numSamples = num;
 		this.graph = graph;
-		omegas = new ArrayList<Omega>(c);
+		omegas = new ArrayList<Omega>();
 		this.pm = pm;
 		samples = new ArrayList<Sample>();
 	}
 	public void addOmega(Omega o){
 		omegas.add(o);
 	}
-	
+	public ArrayList<Omega> getOmegas(){
+		return omegas;
+	}
 	public void genSamples(){
 		
 		for(int i = 0; i < omegas.size() ;i++){
@@ -33,10 +35,10 @@ public class GenerateSamples {
 			Sample s = new Sample();
 			for(int j = 0; j < d; j++){
 				ArrayList<Integer> sampleRow = new ArrayList<Integer>(d);
-				ArrayList<Double> probs = pm.getProbs().get(j);
+				ArrayList<String> probs = pm.getProbs().get(j);
 				for(int x = 0; x < d; x++){
 					
-					if(o.getProbs0().get(x) >= probs.get(x)){
+					if(o.getProbs0().get(x) >= Double.parseDouble(probs.get(x))){
 						sampleRow.add(0);
 					}
 					else{
@@ -50,6 +52,20 @@ public class GenerateSamples {
 			samples.add(s);
 		}
 		
+	}
+	public String toString(){
+		String s = "";
+		System.out.println(omegas.size());
+		int omegaCount = 1;
+		for(int i = 0; i < omegas.size(); i++){
+			s+= "Omega " + omegaCount + " samples:\n";
+			System.out.println(i);
+			s+= samples.get(i).toString();
+			s+="\n";
+			omegaCount++;
+		}
+		
+		return s;
 	}
 	/*
 	private void generateSamples() {
