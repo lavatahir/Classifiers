@@ -1,7 +1,8 @@
 package classifiers;
 
-public class Bayesian extends Classifier{
-
+public class BayesianDep extends Classifier{
+	
+	
 	@Override
 	public void trainData() {
 		// TODO Auto-generated method stub
@@ -12,6 +13,12 @@ public class Bayesian extends Classifier{
 	public double findProbability() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void testData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

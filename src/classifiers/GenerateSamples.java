@@ -33,7 +33,7 @@ public class GenerateSamples {
 		for(int i = 0; i < omegas.size() ;i++){
 			Omega o = omegas.get(i);
 			Sample s = new Sample();
-			for(int j = 0; j < d; j++){
+			for(int j = 0; j < numSamples; j++){
 				ArrayList<Integer> sampleRow = new ArrayList<Integer>(d);
 				ArrayList<String> probs = pm.getProbs().get(j);
 				for(int x = 0; x < d; x++){
@@ -48,10 +48,13 @@ public class GenerateSamples {
 				}
 				s.addSample(sampleRow);
 			}
-			System.out.println(s);
+			//System.out.println(s);
 			samples.add(s);
 		}
 		
+	}
+	public ArrayList<Sample> getSamples(){
+		return samples;
 	}
 	public String toString(){
 		String s = "";
@@ -59,7 +62,7 @@ public class GenerateSamples {
 		int omegaCount = 1;
 		for(int i = 0; i < omegas.size(); i++){
 			s+= "Omega " + omegaCount + " samples:\n";
-			System.out.println(i);
+			//System.out.println(i);
 			s+= samples.get(i).toString();
 			s+="\n";
 			omegaCount++;
